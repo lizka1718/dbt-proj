@@ -1,38 +1,68 @@
+#
+## Name your project! Project names should contain only lowercase characters
+## and underscores. A good package name should reflect your organization's
+## name or the intended use of these models
+#name: 'oms_dbt_proj'
+#version: '1.0.0'
+#
+## This setting configures which "profile" dbt uses for this project.
+#profile: 'oms_dbt_proj'
+#
+## These configurations specify where dbt should look for different types of files.
+## The `model-paths` config, for example, states that models in this project can be
+## found in the "models/" directory. You probably won't need to change these!
+#model-paths: ["models"]
+#analysis-paths: ["analyses"]
+#test-paths: ["tests"]
+#seed-paths: ["seeds"]
+#macro-paths: ["macros"]
+#snapshot-paths: ["snapshots"]
+#
+#clean-targets:         # directories to be removed by `dbt clean`
+#  - "target"
+#  - "dbt_packages"
+#
+#
+## Configuring models
+## Full documentation: https://docs.getdbt.com/docs/configuring-models
+#
+## In this example config, we tell dbt to build all models in the example/
+## directory as views. These settings can be overridden in the individual model
+## files using the `{{ config(...) }}` macro.
+#models:
+#  oms_dbt_proj:
+#    # Config indicated by + and applies to all files under models/example/
+#    example:
+#      +materialized: view
+#
+##
 
-# Name your project! Project names should contain only lowercase characters
-# and underscores. A good package name should reflect your organization's
-# name or the intended use of these models
+
+##iliasi
 name: 'oms_dbt_proj'
+
+config-version: 2
 version: '1.0.0'
 
-# This setting configures which "profile" dbt uses for this project.
-profile: 'oms_dbt_proj'
+profile: 'oms_dbt_proj'  # which profile to use to connect to a data platform
 
-# These configurations specify where dbt should look for different types of files.
-# The `model-paths` config, for example, states that models in this project can be
-# found in the "models/" directory. You probably won't need to change these!
 model-paths: ["models"]
-analysis-paths: ["analyses"]
-test-paths: ["tests"]
 seed-paths: ["seeds"]
+test-paths: ["tests"]
+analysis-paths: ["analysis"]
 macro-paths: ["macros"]
-snapshot-paths: ["snapshots"]
 
-clean-targets:         # directories to be removed by `dbt clean`
+target-path: "target"
+clean-targets:  # DBT will delete when you run dbt clean
   - "target"
-  - "dbt_packages"
+  - "dbt_modules"
+  - "logs"
 
+require-dbt-version: [">=1.0.0", "<2.0.0"]
 
-# Configuring models
-# Full documentation: https://docs.getdbt.com/docs/configuring-models
-
-# In this example config, we tell dbt to build all models in the example/
-# directory as views. These settings can be overridden in the individual model
-# files using the `{{ config(...) }}` macro.
 models:
-  oms_dbt_proj:
-    # Config indicated by + and applies to all files under models/example/
-    example:
-      +materialized: view
+  raw:
+    +materialized: table  # Models in models/raw will be treated as tables
+  core:
+    +materialized: view    # Models in models/core will be treated as views
 
-#

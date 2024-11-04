@@ -11,3 +11,25 @@ oms_dbt_proj:
       threads: 4
 
   target: dev
+
+#iliasi
+
+#base:
+#  outputs:
+#    dev:
+#      type: duckdb
+#  target: dev
+#
+#simplify_analytics:
+#  outputs:
+#    dev:
+#      type: duckdb
+#      path: /home/simplify/Desktop/dbt/simplify/shared/db/dev-datamart.duckdb #"{{ env_var('DUCKDB_DEV_PATH') }}"
+#      schema: dev
+#
+#    prod:
+#      type: duckdb
+#      path: /home/simplify/Desktop/dbt/simplify/shared/db/datamart.duckdb # "{{ env_var('DUCKDB_PROD_PATH') }}" # is a built-in macro in DBT
+#      schema: prod
+#
+#  target: dev # default environment (target) for simplify_analytics profile
